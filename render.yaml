@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: salonity-api
+    env: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn salonity.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+    databases:
+      - name: salonity-db
+        databaseName: salonity
+        user: salonity 
